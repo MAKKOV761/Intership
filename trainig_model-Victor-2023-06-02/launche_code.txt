@@ -1,0 +1,1 @@
+deeplabcut.train_network('C:/Users/Admin/Desktop/trainig_model-Victor-2023-06-02/config.yaml')

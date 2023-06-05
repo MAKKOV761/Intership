@@ -1,0 +1,100 @@
+    # Project definitions (do not edit)
+Task: trainig_model
+scorer: Victor
+date: Jun2
+multianimalproject: false
+identity:
+
+    # Project path (change when moving around)
+project_path: C:/Users/Admin/Desktop/Newfortest/trainig_model-Victor-2023-06-02
+
+    # Annotation data set configuration (and individual video cropping parameters)
+video_sets:
+  Labeled_data/FoxP2_118_010622_CONTRA_GP_6-OHDAday7_comp:
+    crop: 0, 1920, 0, 1080
+  Labeled_data/FoxP2_118_090622_CONTRA_GP_comp:
+    crop: 0, 1920, 0, 1080
+  Labeled_data/FoxP2_118_100622_6-OHDA_CONT_GP_comp:
+    crop: 0, 1920, 0, 1080
+  Labeled_data/FoxP2_118_130622_L-DOPA_CONTRA_GP_comp:
+    crop: 0, 1920, 0, 1080
+  Labeled_data/FoxP2_118_150622_CONTRA_GP_L-DOPA_comp:
+    crop: 0, 1920, 0, 1080
+  Labeled_data/FoxP2_118_190522_CONTRA_GP_comp:
+    crop: 0, 1920, 0, 1080
+  Labeled_data/FoxP2_118_190522_IPSI_GP_comp:
+    crop: 0, 1920, 0, 1080
+  Labeled_data/FoxP2_118_190522_IPSI_STR_comp:
+    crop: 0, 1920, 0, 1080
+  Labeled_data/FoxP2_118_200522_IPSI_STR_comp:
+    crop: 0, 1920, 0, 1080
+  Labeled_data/FoxP2_122_150622_CONTRA_GP_6-OHDA_comp:
+    crop: 0, 1920, 0, 1080
+  Labeled_data/FoxP2_123_220622_CONTRA_GP_L-DOPA_comp:
+    crop: 0, 1920, 0, 1080
+bodyparts:
+- wire
+- snout
+- rEar
+- lEar
+- trPaw
+- tlPaw
+- bodyC
+- brPaw
+- blPaw
+- baseTail
+- endTail
+
+    # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+    # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+    # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+    # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+    # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+    # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+    # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+    # Fraction of video to start/stop when extracting frames for labeling/refinement
+start: 0
+stop: 1
+numframes2pick: 20
+
+    # Plotting configuration
+skeleton:
+- - bodypart1
+  - bodypart2
+- - objectA
+  - bodypart3
+skeleton_color: black
+pcutoff: 0.6
+dotsize: 12
+alphavalue: 0.7
+colormap: rainbow
+
+    # Training,Evaluation and Analysis configuration
+TrainingFraction:
+- 0.95
+iteration: 0
+default_net_type: resnet_50
+default_augmenter: default
+snapshotindex: -1
+batch_size: 8
+
+    # Cropping Parameters (for analysis and outlier frame detection)
+cropping: false
+    #if cropping is true for analysis, then set the values here:
+x1: 0
+x2: 640
+y1: 277
+y2: 624
+
+    # Refinement configuration (parameters from annotation dataset configuration also relevant in this stage)
+corner2move2:
+- 50
+- 50
+move2corner: true
