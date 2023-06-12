@@ -94,9 +94,9 @@ def frames_extract():
 def frames_label():
     """Label the frames"""
     print('Begin labeling')
-    dlc.label_frames(config_path)
     #napari
     while True:
+        dlc.label_frames(config_path)
         x = str(input('"y" to continue (label)'))
         if x.lower() == 'y':
             break
@@ -114,22 +114,41 @@ def train_network():
     dlc.train_network(config_path)
     print('Succes full trained')
 
+y = True
 while True:
     """Asking how the user will start the code (unly quik now)"""
-    x = str(input('Quick start? y/n '))
+    x = str(input('Quik start? y/n '))
     if x.lower() == 'y':
         """If yes, it will do all the function"""
         quick_start = True
         print('Starting the quik mode')
         project_creat()
         frames_extract()
-        frames_label()
-        #dataset_training_create()
-        #train_network()
+        #frames_label()
+        y = False
+        #print('Now start the gui and open the file at this directory:', config_paths)
         break
+
     else:
         """If the symbol is not correct"""
         print("There's not this symbol")
+if y == False:
+    from tkinter import Tk
+    from tkinter.filedialog import askopenfilename
+    # Создаем корневое окно Tkinter
+    root = Tk()
+    root.withdraw()  # Скрываем основное окно
+    config_path = askopenfilename()
+    dlc.label_frames(config_path)
+    while True:
+        x = str(input('"y" to continue (new label)'))
+        if x.lower() == 'y':
+            break
+    dataset_training_create()
+    train_network()
+
+
+
 
 
 """The part of the code for "not quick". Doesn't work now """
