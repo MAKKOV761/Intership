@@ -33,20 +33,21 @@ def generate_unique_folder_name(project_nameL, name, date):
         print('There is not a folder with the same name')
         return folder_name
     suffix = 1
-    match = re.search(r'\((\d+)\)', project_nameL, re.UNICODE)
+    start = project_nameL.find('(')
+    end = project_nameL.find(')')
     digit = ''
-    if match:
-        digit = match.group(1)
+    global project_name
+    if start != -1 and end != -1:
+        digit = project_name[start+1:end]
     if digit.isdigit():
         number = int(digit)
-        suffix =+ number
+        suffix += number
         print('Yesys')
     else:
         print("Npnno")
     print('There is a folder with the same name')
     while True:
         """Generate numbers while the folders have the same name"""
-        global project_name
         project_name = f"{project_nameL}({suffix})"
         new_folder_name = f"{project_name}-{name}-{date}"
         print('Новое имя: ' + new_folder_name)
@@ -94,6 +95,7 @@ def frames_label():
     """Label the frames"""
     print('Begin labeling')
     dlc.label_frames(config_path)
+    #napari
     while True:
         x = str(input('"y" to continue (label)'))
         if x.lower() == 'y':
