@@ -104,7 +104,7 @@ root.withdraw()
 
 #Begin of the code
 while True:
-	x = str(input(('Start creating new project and lebel it?(y/n) ')))
+	x = str(input(('Start creating new project and label it?(y/n) ')))
 	#If the user want to make a project and label it
 	if x.lower() == 'y':
 		creat_unique_folder()
@@ -135,17 +135,39 @@ while True:
 		break
 	#If the user already have a project with labeled data
 	elif x.lower() == 'n':
-		x = str(input(('Start creating a dataset and train the network?(y/n) ')))
-		#If the user want to creat a dataset and train the network
-		if x.lower() == 'y':
-			config_path = askopenfilename()
-			print('Making a dataset for training')
-			input()
-			dlc.create_training_dataset(config_path, augmenter_type='imgaug')
-			print('Begin training')
-			dlc.train_network(config_path)
-			break
-		#If the user want to leave the code
-		elif x.lower() == 'n':
-			print('I finish the code. Bye')
-			break
+		while True:
+			x = str(input(('Start creating a dataset and train the network?(y/n) ')))
+			#If the user want to creat a dataset and train the network
+			if x.lower() == 'y':
+				print('Open the config file of the project (config.yaml)')
+				config_path = askopenfilename()
+				print('Making a dataset for training')
+				dlc.create_training_dataset(config_path, augmenter_type='imgaug')
+				print('Finished creating dataset.\nBegin training')
+				dlc.train_network(config_path)
+				print('Finished train the network.\nBegin evaluate network')
+				dlc.evaluate_network(config_path, Shuffles=[1], plotting=True)
+				print('Finished evaluate network.\nBegin analyze videos and search for videos')
+				current_directory = os.path.dirname(os.path.abspath(__file__))
+				list_videos()
+				dlc.analyze_videos(config_path, videos_list, save_as_csv=True)
+				print('Finished analyze videos\n')
+				break
+			#If the user already have a trained network
+			elif x.lower() == 'n':
+				while True:
+					x = str(input(('Start creating a labeled video?(y/n) ')))
+					if x.lower() == 'y':
+						print('Open the config file of the project (config.yaml)')
+						config_path = askopenfilename()
+						print('Creating a labled video and search for videos')
+						current_directory = os.path.dirname(os.path.abspath(__file__))
+						list_videos()
+						dlc.create_labeled_video(config_path, videos_list, save_frames = True)
+						print('Finished creating a labeled video\n')
+						break
+					elif x.lower() == 'n':
+						print('Stoping the code. Bye')
+						break
+				break
+		break
