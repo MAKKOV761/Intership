@@ -104,9 +104,14 @@ root.withdraw()
 
 #Begin of the code
 while True:
-	x = str(input(('Start creating new project and label it?(y/n) ')))
+	print('1 = Start creating new project and label it')
+	print('2 = Start creating a dataset and train the network')
+	print('3 = Start creating a labeled video')
+	print('4 = Start creating 10 project and do the 1 and 2 part')
+	print('q = quit the code')
+	x = str(input(('Type the number what you want to do: ')))
 	#If the user want to make a project and label it
-	if x.lower() == 'y':
+	if x.lower() == '1':
 		creat_unique_folder()
 		list_videos()
 		print('Creat new project')
@@ -134,40 +139,50 @@ while True:
 		dlc.check_labels(config_path, visualizeindividuals=False)
 		break
 	#If the user already have a project with labeled data
-	elif x.lower() == 'n':
-		while True:
-			x = str(input(('Start creating a dataset and train the network?(y/n) ')))
-			#If the user want to creat a dataset and train the network
-			if x.lower() == 'y':
-				print('Open the config file of the project (config.yaml)')
-				config_path = askopenfilename()
-				print('Making a dataset for training')
-				dlc.create_training_dataset(config_path, augmenter_type='imgaug')
-				print('Finished creating dataset.\nBegin training')
-				dlc.train_network(config_path)
-				print('Finished train the network.\nBegin evaluate network')
-				dlc.evaluate_network(config_path, Shuffles=[1], plotting=True)
-				print('Finished evaluate network.\nBegin analyze videos and search for videos')
-				current_directory = os.path.dirname(os.path.abspath(__file__))
-				list_videos()
-				dlc.analyze_videos(config_path, videos_list, save_as_csv=True)
-				print('Finished analyze videos\n')
-				break
-			#If the user already have a trained network
-			elif x.lower() == 'n':
-				while True:
-					x = str(input(('Start creating a labeled video?(y/n) ')))
-					if x.lower() == 'y':
-						print('Open the config file of the project (config.yaml)')
-						config_path = askopenfilename()
-						print('Creating a labled video and search for videos')
-						current_directory = os.path.dirname(os.path.abspath(__file__))
-						list_videos()
-						dlc.create_labeled_video(config_path, videos_list, save_frames = True)
-						print('Finished creating a labeled video\n')
-						break
-					elif x.lower() == 'n':
-						print('Stoping the code. Bye')
-						break
-				break
+	elif x.lower() == '2':
+		#If the user want to creat a dataset and train the network
+		print('Open the config file of the project (config.yaml)')
+		config_path = askopenfilename()
+		print('Making a dataset for training')
+		dlc.create_training_dataset(config_path, augmenter_type='imgaug')
+		print('Finished creating dataset.\nBegin training')
+		dlc.train_network(config_path)
+		print('Finished train the network.\nBegin evaluate network')
+		dlc.evaluate_network(config_path, Shuffles=[1], plotting=True)
+		print('Finished evaluate network.\nBegin analyze videos and search for videos')
+		current_directory = os.path.dirname(os.path.abspath(__file__))
+		list_videos()
+		dlc.analyze_videos(config_path, videos_list, save_as_csv=True)
+		print('Finished analyze videos\n')
+		list_videos()
+		dlc.filterpredictions(config_path, videos_list)
+		dlc.plot_trajectories(config_path, videos_list)
+		break
+		#If the user already have a trained network
+	elif x.lower() == '3':
+		print('Open the config file of the project (config.yaml)')
+		config_path = askopenfilename()
+		print('Creating a labled video and search for videos')
+		current_directory = os.path.dirname(os.path.abspath(__file__))
+		list_videos()
+		dlc.create_labeled_video(config_path, videos_list, save_frames = True)
+		print('Finished creating a labeled video\n')
+		break
+	elif x.lower() == '4':
+		break # DELETE IT AFTER
+		list_videos()
+		print('Creating the new projects')
+		y = 0
+		while not y == 10:
+			creat_unique_folder()
+			dlc.create_new_project(project_name, name, videos_list, working_directory=current_directory, copy_videos=True, multianimal=False)
+			ask_for_bodyparts()
+			#Ask if he want to continue after the changing of the config file
+			while True:
+				x = str(input('"y" to continue (config file modifing)'))
+				if x.lower() == 'y':
+					break
+
+	elif x.lower() == 'q':
+		print('Stoping the code. Bye')
 		break
