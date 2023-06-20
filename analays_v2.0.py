@@ -8,9 +8,28 @@ from tkinter.filedialog import askdirectory
 
 root = Tk()
 root.withdraw()
-directory = askdirectory(title="Выберите папку")
+directory = askdirectory(title="Chose the folder with the projects")
 
-csv_files = [file for file in os.listdir(directory) if file.endswith('.csv')]
+def find_csv_files(directory):
+    csv_files = []  # Список для хранения найденных файлов CSV
+    
+    # Путь к папке evaluation-results
+    evaluation_results_dir = os.path.join(directory, "evaluation-results")
+    
+    # Проверка наличия папки evaluation-results
+    if not os.path.exists(evaluation_results_dir):
+        print("Folder 'evaluation-results' не найдена.")
+        return csv_files
+    
+    # Обход всех файлов внутри папки evaluation-results
+    for root, dirs, files in os.walk(evaluation_results_dir):
+        for file in files:
+            if file.endswith(".csv"):
+                csv_file = os.path.join(root, file)
+                csv_files.append(csv_file)
+    
+    return csv_files
+csv_files = find_csv_files(directory)
 
 # Списки для хранения значений
 training_iterations = []
