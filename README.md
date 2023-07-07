@@ -13,4 +13,5 @@ If net_type is equal to ["resnet_50","resnet_101"], then 2 datasets will be crea
 (In the config file.json parameters are divided into two categories to better navigate. For more detailed information for each parameter, refer to the documentation: https://deeplabcut.github.io/DeepLabCut/docs/standardDeepLabCut_UserGuide.html#g-train-the-network )
 
 What doesn't work yet:
-1. modelprefix in 
+1. modelprefix in train_network
+2. Analaysing the results
