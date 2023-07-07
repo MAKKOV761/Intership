@@ -12,11 +12,9 @@ import matplotlib.pyplot as plt
 print('Import deeplabcut')
 import deeplabcut as dlc 
 
-#sets the current_directory and the time
 current_directory = os.path.dirname(os.path.abspath(__file__))
 date = datetime.date.today()
 
-#sets the valid parameters
 dataset_valid = ["num_shuffles","Shuffles","userfeedback","trainIndices","testIndices","net_type","augmenter_type","posecfg_template"]
 network_valid = ["shuffle","trainingsetindex","max_snapshots_to_keep","displayiters","saveiters","maxiters","allow_growth","gputouse","autotune","keepdeconvweights","modelprefix"]
 together_valid = dataset_valid+network_valid
@@ -74,11 +72,11 @@ directory_working_place = os.path.join(current_directory, unique_name(working_pl
 os.makedirs(directory_working_place)
 print('Finished making folder')
 
-#list with the required folders and files
+#список с необходими папками и файлами
 required_folders = ["videos", "labeled-data"]
 required_files = ["config.yaml"]
 
-#Checks the presence of the necessary folders and files, as well as the contents of folders
+#Проверяет наличие нужных папок и файлом, а также содержимое папкок
 print('Cheking the required folders')
 while True:
 	labeled_project_path = option["labeled_project_path"]
@@ -107,7 +105,7 @@ while True:
 	input("Press Enter to continue...")
 print('Finished cheking')
 
-#Adds video paths to the list
+#Добавляет пути к видео в список
 def list_videos(directory, chose):
 	videos_list = []
 	if chose == True:

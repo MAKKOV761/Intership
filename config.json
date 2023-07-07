@@ -17,7 +17,7 @@
 	"max_snapshots_to_keep":[null],
 	"displayiters":[null],
 	"saveiters":[null],
-	"maxiters":[null],
+	"maxiters":[1, 2, 3],
 	"allow_growth":[null],
 	"gputouse":[null],
 	"autotune":[null],
