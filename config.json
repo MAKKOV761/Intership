@@ -1,0 +1,26 @@
+{
+	"name":"User",
+	"project_name":"New_folder",
+	"labeled_project_path": "C:/Users/Admin/Intership/making_project_place/Labeled_project",
+
+	"num_shuffles":[null],
+	"Shuffles":[null],
+	"userfeedback":[null],
+	"trainIndices":[null],
+	"testIndices":[null],
+	"net_type":[null],
+	"augmenter_type":[null],
+	"posecfg_template":[null],
+
+	"shuffle":[null],
+	"trainingsetindex":[null],
+	"max_snapshots_to_keep":[null],
+	"displayiters":[null],
+	"saveiters":[null],
+	"maxiters":[null],
+	"allow_growth":[null],
+	"gputouse":[null],
+	"autotune":[null],
+	"keepdeconvweights":[null],
+	"modelprefix":[null]
+}
